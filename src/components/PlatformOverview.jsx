@@ -1,126 +1,119 @@
 import { motion } from 'framer-motion'
-import {
-  BookOpen,
-  Video,
-  CheckSquare,
-  PenTool,
-  UserCheck,
-  MessageSquare,
-  Briefcase,
-  FolderOpen,
-  QrCode,
-  BarChart3,
-  UserCog,
-  Download,
-  Users,
-} from 'lucide-react'
+import { BarChart3, Check, GraduationCap, Users } from 'lucide-react'
 
-const STUDENT_FEATURES = [
-  { icon: BookOpen, label: 'Parcours de formation structurés' },
-  { icon: Video, label: 'Cours PDF et vidéo' },
-  { icon: CheckSquare, label: 'Questionnaires et évaluations' },
-  { icon: PenTool, label: 'Ardoise interactive' },
-  { icon: UserCheck, label: 'Suivi de présence' },
-  { icon: MessageSquare, label: 'Forum de discussion' },
-  { icon: Briefcase, label: 'Opportunités professionnelles' },
+const STUDENT = [
+  'Orientation d\'entrée par diagnostic',
+  'Cours structurés par niveau et par partie',
+  'Présence par QR code',
+  'Quiz d\'évaluation par niveau',
+  'Soumission de livrables de projet',
+  'Orientation de sortie & profil professionnel',
 ]
 
-const TRAINER_FEATURES = [
-  { icon: FolderOpen, label: 'Gestion des parcours et sections' },
-  { icon: CheckSquare, label: 'Création de questionnaires' },
-  { icon: QrCode, label: 'Pointage de présence par QR code' },
-  { icon: BarChart3, label: 'Tableau de bord KPI' },
-  { icon: UserCog, label: 'Suivi individuel des étudiants' },
-  { icon: Download, label: 'Export de données Excel' },
-  { icon: Users, label: 'Gestion multi-rôles (formateur, assistant, responsable)' },
+const TRAINER = [
+  'Création de parcours multi-niveaux et multi-parties',
+  'Quiz et projets par niveau (débutant / intermédiaire / avancé)',
+  'Réception et notation des livrables',
+  'Pointage de présence par QR code',
+  'Tableau de bord KPI temps réel',
+  'Suivi individuel des étudiants',
+  'Gestion multi-rôles',
+  'Export Excel',
 ]
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 36 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-}
-
-function AppCard({ id, badge, title, desc, features }) {
+function Card({ badge, title, desc, items, accent, icon: Icon, glow }) {
   return (
-    <motion.article
-      id={id}
-      variants={cardVariants}
-      className="flex-1 bg-[#111111] border border-[#222222] p-8 md:p-10 flex flex-col gap-7 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 24 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+      }}
+      className="group relative overflow-hidden rounded-3xl border border-white/9 bg-[#0C100F] p-7 sm:p-9 flex flex-col gap-7"
     >
+      <div className={`absolute -right-20 -top-20 h-52 w-52 rounded-full blur-[80px] ${glow}`} />
       <div>
-        <span className="inline-block px-3 py-1 text-xs border border-[#2a2a2a] text-[#777777] mb-5">
-          {badge}
-        </span>
-        <h3
-          className="text-2xl font-bold text-white mb-3"
-          style={{ fontFamily: "'Google Sans', sans-serif" }}
-        >
+        <div className="relative mb-8 flex items-center justify-between">
+          <span className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: accent }}>{badge}</span>
+          <span className="grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-white/[0.04]" style={{ color: accent }}>
+            <Icon size={20} />
+          </span>
+        </div>
+        <h3 className="relative text-white text-2xl sm:text-3xl font-bold mb-3">
           {title}
         </h3>
-        <p className="text-[#A0A0A0] text-sm leading-relaxed">{desc}</p>
+        <p className="relative text-[#A3ADAA] text-sm leading-relaxed">{desc}</p>
       </div>
 
-      <ul className="flex flex-col gap-3">
-        {features.map(({ icon: Icon, label }) => (
-          <li key={label} className="flex items-start gap-3">
-            <Icon size={14} className="text-[#444444] shrink-0 mt-0.5" />
-            <span className="text-[#888888] text-sm leading-snug">{label}</span>
+      <ul className="relative grid gap-3 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-3">
+            <Check size={14} className="mt-0.5 shrink-0" style={{ color: accent }} />
+            <span className="text-[#A3ADAA] text-sm leading-snug">{item}</span>
           </li>
         ))}
       </ul>
-    </motion.article>
+    </motion.div>
   )
 }
 
 export default function PlatformOverview() {
   return (
-    <section id="platform" className="py-28 px-6 border-t border-[#222222]">
+    <section id="platform" className="relative py-20 sm:py-28 px-5 sm:px-6 bg-white/[0.018]">
+      <div className="absolute inset-x-0 top-0 h-px bg-white/8" />
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12 sm:mb-16 text-center"
         >
-          <p className="text-[#444444] text-xs uppercase tracking-wide mb-4">
-            Deux apps, une plateforme
-          </p>
-          <h2
-            className="text-4xl md:text-5xl font-bold text-white leading-[1.1]"
-            style={{ fontFamily: "'Google Sans', sans-serif" }}
-          >
-            Un écosystème pensé pour les deux
-            <br className="hidden md:block" /> côtés de la formation
+          <p className="eyebrow mb-5">Deux expériences, une plateforme</p>
+          <h2 className="text-balance text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.035em]">
+            Chacun voit ce dont il a besoin.
           </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-[#9BA5A2]">
+            Une expérience fluide pour apprendre. Un cockpit complet pour accompagner.
+          </p>
         </motion.div>
 
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
-          className="grid md:grid-cols-2 gap-6"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+          className="grid md:grid-cols-2 gap-4"
         >
-          <AppCard
-            id="qdclic"
+          <Card
             badge="Apprenants"
-            title="L'app des étudiants"
-            desc="Accédez à vos cours, suivez votre progression, passez vos évaluations et interagissez avec votre communauté — tout en un."
-            features={STUDENT_FEATURES}
+            title="Ardoiz Étudiant"
+            desc="De l'orientation d'entrée jusqu'au bilan de sortie."
+            items={STUDENT}
+            accent="#00E0E8"
+            icon={GraduationCap}
+            glow="bg-[#00E0E8]/15"
           />
-          <AppCard
-            id="qfdclic"
+          <Card
             badge="Formateurs"
-            title="L'app des formateurs"
-            desc="Gérez vos étudiants, créez vos contenus pédagogiques, suivez les performances et animez vos sessions en temps réel."
-            features={TRAINER_FEATURES}
+            title="Ardoiz Formateur"
+            desc="Créez, pilotez et suivez vos formations en temps réel."
+            items={TRAINER}
+            accent="#A78BFA"
+            icon={BarChart3}
+            glow="bg-[#A78BFA]/15"
           />
         </motion.div>
+
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="glass-card flex items-center gap-4 rounded-2xl p-5">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#00E0E8]/10 text-[#00E0E8]"><Users size={18} /></span>
+            <div><strong className="block text-sm">Une donnée partagée</strong><span className="text-xs text-[#88938F]">Toujours synchronisée entre les deux espaces</span></div>
+          </div>
+          <div className="glass-card flex items-center gap-4 rounded-2xl p-5">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#A78BFA]/10 text-[#A78BFA]"><BarChart3 size={18} /></span>
+            <div><strong className="block text-sm">Une vision claire</strong><span className="text-xs text-[#88938F]">Les bons indicateurs, au bon moment</span></div>
+          </div>
+        </div>
       </div>
     </section>
   )

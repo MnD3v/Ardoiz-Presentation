@@ -1,78 +1,38 @@
-const LINKS = [
-  {
-    heading: 'Plateforme',
-    items: [
-      { label: 'Fonctionnalités', href: '#features' },
-      { label: 'Comment ça fonctionne', href: '#howitworks' },
-      { label: 'Ardoiz Etudiant — Apprenants', href: '#qdclic' },
-      { label: 'Ardoiz-Formateur — Formateurs', href: '#qfdclic' },
-    ],
-  },
-  {
-    heading: 'Contact',
-    items: [
-      { label: 'Demander une démo', href: '#contact' },
-      { label: 'saeicube.tools@gmail.com', href: 'mailto:saeicube.tools@gmail.com' },
-    ],
-  },
-  {
-    heading: 'Légal',
-    items: [
-      { label: 'Mentions légales', href: '#' },
-      { label: 'Politique de confidentialité', href: '#' },
-      { label: 'CGU', href: '#' },
-    ],
-  },
-]
+import { ArrowUpRight } from 'lucide-react'
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer id="contact" className="border-t border-[#222222] pt-16 pb-8 px-6">
-      <div className="max-w-6xl mx-auto">
-
-        <div className="flex flex-col md:flex-row justify-between gap-12 mb-14">
-          <div className="max-w-xs">
-            <span
-              className="text-white font-bold text-xl tracking-wide block mb-4"
-              style={{ fontFamily: "'Google Sans', sans-serif" }}
-            >
-              ARDOIZ
+    <footer className="border-t border-white/8 py-12 px-5 sm:px-6">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-10">
+        <div>
+          <a href="#" className="mb-4 flex items-center gap-2.5 text-white font-bold tracking-[0.16em] uppercase">
+            <span className="grid h-8 w-8 place-items-center rounded-lg border border-[#00E0E8]/25 bg-[#00E0E8]/8">
+              <img src="/ardoiz-logo.png" alt="" className="h-5 w-5 object-contain" />
             </span>
-            <p className="text-[#444444] text-sm leading-relaxed">
-              La plateforme e-learning des centres de formation modernes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-10">
-            {LINKS.map(({ heading, items }) => (
-              <div key={heading}>
-                <h4 className="text-[#666666] text-xs uppercase tracking-wide font-medium mb-4">
-                  {heading}
-                </h4>
-                <ul className="flex flex-col gap-3">
-                  {items.map(({ label, href }) => (
-                    <li key={label}>
-                      <a
-                        href={href}
-                        className="text-[#444444] hover:text-white text-sm transition-colors duration-200"
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+            <span className="text-sm">Ardoiz</span>
+          </a>
+          <p className="text-[#87928E] text-sm leading-relaxed max-w-sm">
+            La plateforme e-learning pensée pour les centres de formation.
+          </p>
         </div>
 
-        <div className="pt-6 border-t border-[#1a1a1a] flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-[#333333] text-xs">© {year} Ardoiz. Tous droits réservés.</p>
-          <p className="text-[#333333] text-xs">Fait avec soin pour les centres de formation.</p>
+        <div className="flex flex-col items-start gap-3 md:items-end">
+          <p className="text-[#66716D] text-xs uppercase tracking-widest font-medium">Contact</p>
+          <a
+            href="mailto:saeicube.tools@gmail.com"
+            className="inline-flex items-center gap-1.5 text-[#A3ADAA] hover:text-[#00E0E8] text-sm transition-colors duration-200"
+          >
+            saeicube.tools@gmail.com
+            <ArrowUpRight size={14} />
+          </a>
         </div>
+      </div>
 
+      <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-white/8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-[#5E6965] text-xs">© {year} Ardoiz. Tous droits réservés.</p>
+        <p className="text-[#4F5A56] text-xs">Conçu pour faire grandir les talents.</p>
       </div>
     </footer>
   )
